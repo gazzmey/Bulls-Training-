@@ -634,6 +634,7 @@ footer {
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .nav-cta-mobile { display: none; }
+.nav-admin-mobile-item { display: none; }
 
 /* HORARIOS — scroll horizontal en mobile */
 .schedule-wrapper {
@@ -648,6 +649,7 @@ footer {
   .nav-cta-desktop { display: none; }
   .nav-cta-mobile { display: list-item; list-style: none; margin-top: 0.5rem; }
   .nav-cta-mobile .nav-cta { width: 100%; text-align: center; padding: 0.8rem; }
+  .nav-admin-mobile-item.show-admin { display: list-item; list-style: none; }
 
   .nav-links {
     display: none;

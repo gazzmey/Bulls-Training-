@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Si es admin, mostrar accesos exclusivos al panel
     if (user.rol === 'admin') {
       if (adminBtn) adminBtn.style.display = 'inline-block';
-      if (adminMobile) adminMobile.style.display = 'list-item';
+      if (adminMobile) adminMobile.classList.add('show-admin');
     }
   }
 
