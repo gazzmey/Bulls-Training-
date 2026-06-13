@@ -719,6 +719,23 @@ footer {
 .nav-login-btn:hover { background: var(--red-glow); border-color: var(--red); }
 
 .nav-user { display: flex; align-items: center; gap: 0.7rem; }
+.nav-admin-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--red);
+  color: var(--white);
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--red);
+  text-decoration: none;
+  margin-right: 0.4rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-admin-btn:hover {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+}
 .nav-user-avatar {
   width: 32px; height: 32px; border-radius: 50%;
   background: var(--red);

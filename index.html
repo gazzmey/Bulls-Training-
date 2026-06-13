@@ -21,10 +21,12 @@
     <li><a href="#planes" class="nav-close">Planes</a></li>
     <li><a href="#eventos" class="nav-close">Eventos</a></li>
     <li><a href="#contacto" class="nav-close">Contacto</a></li>
+    <li class="nav-admin-mobile-item" id="navAdminMobile" style="display:none;"><a href="admin.html" class="nav-close" style="color:var(--red); font-weight:bold;">Panel Admin</a></li>
     <li class="nav-cta-mobile"><a href="login.html" class="nav-cta" style="display:block;text-align:center;text-decoration:none;">Iniciar sesión</a></li>
   </ul>
   <a href="login.html" class="nav-login-btn nav-cta-desktop" id="navLoginBtn">Iniciar sesión</a>
   <div class="nav-user" id="navUser" style="display:none;">
+    <a href="admin.html" class="nav-admin-btn" id="navAdminBtn" style="display:none;">Panel Admin</a>
     <div class="nav-user-avatar" id="navAvatar">?</div>
     <span id="navUserName"></span>
     <button class="nav-logout-btn" onclick="cerrarSesion()">Salir</button>

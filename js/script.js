@@ -8,12 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const userEl   = document.getElementById('navUser');
   const avatarEl = document.getElementById('navAvatar');
   const nameEl   = document.getElementById('navUserName');
+  const adminBtn = document.getElementById('navAdminBtn');
+  const adminMobile = document.getElementById('navAdminMobile');
 
   if (user && loginBtn && userEl) {
     loginBtn.style.display = 'none';
     userEl.style.display   = 'flex';
     if (avatarEl) avatarEl.textContent = user.nombre.charAt(0).toUpperCase();
     if (nameEl)   nameEl.textContent   = user.nombre.split(' ')[0];
+    
+    // Si es admin, mostrar accesos exclusivos al panel
+    if (user.rol === 'admin') {
+      if (adminBtn) adminBtn.style.display = 'inline-block';
+      if (adminMobile) adminMobile.style.display = 'list-item';
+    }
   }
 
   // ── Scroll suave al hacer clic en "Empieza hoy" ───────────────────────
