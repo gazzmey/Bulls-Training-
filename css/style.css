@@ -79,8 +79,8 @@ nav {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: flex-end;
-  padding: 0 3rem 6rem;
+  align-items: center;
+  padding: 7rem 3rem 5rem;
   position: relative;
   overflow: hidden;
   background: var(--darker);
@@ -107,15 +107,15 @@ nav {
 
 .hero-number {
   position: absolute;
-  right: -2rem;
-  top: 50%;
-  transform: translateY(-50%);
+  right: -3rem;
+  bottom: -2rem;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 28vw;
-  color: rgba(200,16,46,0.05);
+  font-size: 32vw;
+  color: rgba(200,16,46,0.04);
   line-height: 1;
   pointer-events: none;
   user-select: none;
+  letter-spacing: -0.05em;
 }
 
 .hero-content {
@@ -145,11 +145,11 @@ nav {
 
 .hero h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4rem, 10vw, 9rem);
-  line-height: 0.9;
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  line-height: 0.92;
   letter-spacing: 0.02em;
   color: var(--white);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 .hero h1 .accent { color: var(--red); }
@@ -201,10 +201,11 @@ nav {
 .hero-stats {
   position: absolute;
   right: 3rem;
-  bottom: 6rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
   z-index: 2;
 }
 
@@ -594,7 +595,7 @@ footer {
 @media (max-width: 700px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
-  .hero { padding: 0 1.5rem 4rem; }
+  .hero { padding: 6rem 1.5rem 3rem; align-items: flex-start; }
   .hero-stats { display: none; }
   section { padding: 4rem 1.5rem; }
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
