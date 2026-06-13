@@ -599,13 +599,97 @@ footer {
 }
 .whatsapp-float:hover { transform: scale(1.08); }
 
-@media (max-width: 700px) {
-  nav { padding: 1rem 1.5rem; }
-  .nav-links { display: none; }
-  .hero { padding: 6rem 1.5rem 3rem; align-items: flex-start; }
-  .hero-stats { display: none; }
-  section { padding: 4rem 1.5rem; }
-  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .form-row { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+/* HAMBURGER */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
 }
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-cta-mobile { display: none; }
+
+/* HORARIOS — scroll horizontal en mobile */
+.schedule-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 700px) {
+  /* NAV */
+  nav { padding: 1rem 1.5rem; }
+  .nav-hamburger { display: flex; }
+  .nav-cta-desktop { display: none; }
+  .nav-cta-mobile { display: list-item; list-style: none; margin-top: 0.5rem; }
+  .nav-cta-mobile .nav-cta { width: 100%; text-align: center; padding: 0.8rem; }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 5rem 2rem 3rem;
+    z-index: 100;
+    height: 100dvh;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .nav-links a {
+    display: block;
+    padding: 1.2rem 0;
+    font-size: 1.3rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100svh;
+    padding: 6rem 1.5rem 3rem;
+    align-items: flex-start;
+  }
+  .hero-number { display: none; }
+  .hero-stats { display: none; }
+  .hero h1 { font-size: clamp(2.8rem, 14vw, 4rem); }
+  .hero-desc { font-size: 0.95rem; max-width: 100%; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+
+  /* SECCIONES */
+  section { padding: 3.5rem 1.5rem; }
+  .section-title { font-size: clamp(2rem, 10vw, 3rem); margin-bottom: 2rem; }
+
+  /* HORARIOS — tabla scrollable */
+  .schedule-table { font-size: 0.82rem; }
+  .schedule-table th, .schedule-table td { padding: 0.8rem 1rem; white-space: nowrap; }
+
+  /* PLANES */
+  .planes-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* CONTACTO */
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* FOOTER */
+  footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.5rem; }
+}
+

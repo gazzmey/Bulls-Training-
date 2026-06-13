@@ -11,13 +11,17 @@
 
 <nav>
   <div class="nav-logo">BULLS <span>TRAINING</span></div>
-  <ul class="nav-links">
-    <li><a href="#clases">Clases</a></li>
-    <li><a href="#horarios">Horarios</a></li>
-    <li><a href="#planes">Planes</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#clases" class="nav-close">Clases</a></li>
+    <li><a href="#horarios" class="nav-close">Horarios</a></li>
+    <li><a href="#planes" class="nav-close">Planes</a></li>
+    <li><a href="#contacto" class="nav-close">Contacto</a></li>
+    <li class="nav-cta-mobile"><button class="nav-cta">Clase de prueba</button></li>
   </ul>
-  <button class="nav-cta">Clase de prueba</button>
+  <button class="nav-cta nav-cta-desktop">Clase de prueba</button>
+  <button class="nav-hamburger" id="navToggle" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <section class="hero" id="inicio">
@@ -89,6 +93,7 @@
 <section id="horarios">
   <p class="section-tag">Organiza tu semana</p>
   <h2 class="section-title">HORARIOS</h2>
+  <div class="schedule-wrapper">
   <table class="schedule-table">
     <thead>
       <tr>
@@ -130,6 +135,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <section id="planes">
