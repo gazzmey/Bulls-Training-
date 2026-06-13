@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Iniciar Sesión — Bulls Training</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="img/images.jfif" type="image/jpeg">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -129,7 +130,10 @@ nav {
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">BULLS <span>TRAINING</span></a>
+  <a href="index.html" class="nav-logo">
+    <img src="img/images.jfif" alt="Bulls Training" style="height:36px;width:36px;object-fit:contain;border-radius:50%;">
+    BULLS <span>TRAINING</span>
+  </a>
   <a href="index.html" class="nav-back">← Volver al inicio</a>
 </nav>
 
@@ -238,19 +242,22 @@ nav {
 </div>
 
 <script>
+// Usuario admin (demo)
+const ADMIN = { email: 'admin@bulls.cl', pass: 'admin123' };
+
 const EVENTOS = {
   1: { nombre: 'Velada de Boxeo #1', fecha: '15 Jul 2026', hora: '20:00', precio: '$15.000' },
   2: { nombre: 'Noche de Campeones', fecha: '03 Ago 2026', hora: '21:00', precio: '$20.000' },
   3: { nombre: 'Torneo Amateur Bulls', fecha: '20 Ago 2026', hora: '18:00', precio: '$8.000' },
 };
 
-const params = new URLSearchParams(location.search);
+const params   = new URLSearchParams(location.search);
 const eventoId = params.get('evento') || 1;
-const evento = EVENTOS[eventoId];
+const evento   = EVENTOS[eventoId];
 
-// Si ya hay sesión, redirigir directo
+// Si ya hay sesión activa, redirigir según rol
 const sesion = JSON.parse(localStorage.getItem('bt_user') || 'null');
-if (sesion) goToTicket(sesion);
+if (sesion) redirigirPorRol(sesion);
 
 // Tabs
 function switchTab(tab) {
@@ -264,18 +271,26 @@ document.querySelectorAll('.auth-tab-btn').forEach(btn => {
 // LOGIN
 document.getElementById('loginForm').addEventListener('submit', e => {
   e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass  = document.getElementById('loginPass').value;
-  // Demo: cualquier email + contraseña ≥ 6 caracteres es válido
+
   if (!email || pass.length < 6) {
     document.getElementById('loginError').classList.add('show'); return;
   }
-  const nombre = email.split('@')[0];
-  const user = { nombre: capitalize(nombre), email, rut: 'Demo', tel: '' };
+
+  let user;
+  if (email === ADMIN.email && pass === ADMIN.pass) {
+    // Usuario administrador
+    user = { nombre: 'Administrador', email, rut: '—', tel: '—', rol: 'admin' };
+  } else {
+    // Usuario normal
+    user = { nombre: capitalize(email.split('@')[0]), email, rut: 'Demo', tel: '', rol: 'usuario' };
+  }
+
   completarAuth(user);
 });
 
-// REGISTER
+// REGISTER — siempre crea usuarios normales
 document.getElementById('registerForm').addEventListener('submit', e => {
   e.preventDefault();
   const nombre   = document.getElementById('regNombre').value.trim();
@@ -287,7 +302,7 @@ document.getElementById('registerForm').addEventListener('submit', e => {
   if (!nombre || !apellido || !rut || !email || pass.length < 6) {
     document.getElementById('regError').classList.add('show'); return;
   }
-  const user = { nombre: nombre + ' ' + apellido, email, rut, tel };
+  const user = { nombre: nombre + ' ' + apellido, email, rut, tel, rol: 'usuario' };
   completarAuth(user);
 });
 
@@ -296,12 +311,16 @@ function completarAuth(user) {
   document.querySelectorAll('.auth-form').forEach(f => f.style.display = 'none');
   document.querySelectorAll('.auth-tabs').forEach(t => t.style.display = 'none');
   document.getElementById('authSuccess').classList.add('show');
-  setTimeout(() => goToTicket(user), 1500);
+  setTimeout(() => redirigirPorRol(user), 1200);
 }
 
-function goToTicket(user) {
-  localStorage.setItem('bt_evento', JSON.stringify({ id: eventoId, ...evento }));
-  window.location.href = 'ticket.html';
+function redirigirPorRol(user) {
+  if (user.rol === 'admin') {
+    window.location.href = 'admin.html';
+  } else {
+    localStorage.setItem('bt_evento', JSON.stringify({ id: eventoId, ...evento }));
+    window.location.href = 'ticket.html';
+  }
 }
 
 function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }

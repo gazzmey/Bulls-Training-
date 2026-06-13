@@ -6,24 +6,18 @@
 <title>Admin — Bulls Training</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css">
+<link rel="icon" href="img/images.jfif" type="image/jpeg">
 </head>
 <body>
 
-<!-- LOGIN GATE -->
-<div id="loginGate">
-  <div class="gate-box">
-    <div class="gate-logo">BULLS <span>TRAINING</span></div>
-    <div class="gate-sub">Panel Administrador</div>
-    <input type="text"     id="gUser" placeholder="Usuario"    autocomplete="off">
-    <input type="password" id="gPass" placeholder="Contraseña">
-    <div class="gate-err" id="gErr">Credenciales incorrectas</div>
-    <button class="gate-btn" onclick="adminLogin()">Ingresar</button>
-  </div>
-</div>
+
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo">BULLS <span>T</span><span class="sidebar-badge admin-word">ADMIN</span></div>
+  <div class="sidebar-logo">
+    <img src="img/images.jfif" alt="Bulls" class="sidebar-logo-img">
+    BULLS <span>T</span><span class="sidebar-badge admin-word">ADMIN</span>
+  </div>
   <nav class="sidebar-nav">
     <div class="snav-item active" onclick="showTab('dashboard')"><span class="snav-icon">📊</span><span>Dashboard</span></div>
     <div class="snav-item" onclick="showTab('eventos')"><span class="snav-icon">🥊</span><span>Eventos</span></div>
@@ -142,17 +136,24 @@
 </div>
 
 <script>
-// Auth
-function adminLogin(){
-  const u=document.getElementById('gUser').value.trim();
-  const p=document.getElementById('gPass').value;
-  if(u==='admin' && p==='admin123'){
-    document.getElementById('loginGate').style.display='none';
-  } else {
-    document.getElementById('gErr').style.display='block';
-  }
+// Verificar sesión admin desde localStorage
+const adminUser = JSON.parse(localStorage.getItem('bt_user') || 'null');
+if (!adminUser || adminUser.rol !== 'admin') {
+  window.location.href = 'login.html';
 }
-function adminLogout(){ document.getElementById('loginGate').style.display='flex'; }
+
+// Mostrar nombre en sidebar
+if (adminUser) {
+  const el = document.querySelector('.sidebar-user strong');
+  if (el) el.textContent = adminUser.nombre;
+}
+
+// Cerrar sesión → volver al login
+function adminLogout() {
+  localStorage.removeItem('bt_user');
+  localStorage.removeItem('bt_evento');
+  window.location.href = 'login.html';
+}
 
 // Tabs
 function showTab(id){
@@ -192,9 +193,6 @@ function simulateScan(valid){
       <div><div class="scan-field-label">Motivo</div><div class="scan-field-value" style="color:#ff6b6b">Ya fue usado anteriormente</div></div>`;
   }
 }
-
-// Enter key on login
-document.getElementById('gPass').addEventListener('keydown',e=>{ if(e.key==='Enter') adminLogin(); });
 </script>
 </body>
 </html>

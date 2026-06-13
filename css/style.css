@@ -42,8 +42,19 @@ nav {
   font-size: 1.8rem;
   letter-spacing: 0.12em;
   color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 .nav-logo span { color: var(--red); }
+.nav-logo-img {
+  height: 38px;
+  width: 38px;
+  object-fit: contain;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 
 .nav-links {
   display: flex;
