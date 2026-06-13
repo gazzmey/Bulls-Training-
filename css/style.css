@@ -89,20 +89,27 @@ nav {
 .hero-bg {
   position: absolute;
   inset: 0;
+  background-image: url('../img/SaveClip.App_517583251_18169262491354121_7853052366678824187_n.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  filter: brightness(0.55) saturate(0.9);
+  transform: scale(1.03);
+  transition: transform 8s ease;
+}
+.hero:hover .hero-bg {
+  transform: scale(1.06);
+}
+
+/* Overlay rojo sobre la imagen */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(200,16,46,0.12) 0%, transparent 70%),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 79px,
-      rgba(255,255,255,0.02) 80px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 79px,
-      rgba(255,255,255,0.02) 80px
-    );
+    linear-gradient(to right, rgba(10,10,10,0.72) 35%, rgba(10,10,10,0.15) 100%),
+    linear-gradient(to top, rgba(10,10,10,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 80% 50%, rgba(200,16,46,0.12) 0%, transparent 70%);
 }
 
 .hero-number {
