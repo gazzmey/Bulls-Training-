@@ -693,3 +693,109 @@ footer {
   footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.5rem; }
 }
 
+/* ── NAV LOGIN / USER ───────────────────────────────────────────────── */
+.nav-login-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(200,16,46,0.5);
+  color: var(--white);
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-login-btn:hover { background: var(--red-glow); border-color: var(--red); }
+
+.nav-user { display: flex; align-items: center; gap: 0.7rem; }
+.nav-user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--white);
+}
+.nav-user > span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.1em; color: var(--white);
+}
+.nav-logout-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background: none; border: 1px solid rgba(255,255,255,0.15);
+  color: var(--gray-text); padding: 0.3rem 0.7rem; cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-logout-btn:hover { color: var(--red); border-color: var(--red); }
+
+/* ── EVENTOS ────────────────────────────────────────────────────────── */
+#eventos { background: var(--black); }
+
+.eventos-grid {
+  display: flex; flex-direction: column;
+  gap: 1px; background: rgba(255,255,255,0.05); margin-top: 2rem;
+}
+.evento-card {
+  background: var(--dark); padding: 2rem 2.5rem;
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 2rem; align-items: center; transition: background 0.2s;
+}
+.evento-card:hover { background: var(--gray); }
+
+.evento-date-badge {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--red-glow); border: 1px solid rgba(200,16,46,0.3);
+  padding: 0.8rem 1.2rem; min-width: 68px;
+}
+.evento-day {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem; color: var(--red); line-height: 1;
+}
+.evento-month {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.2em; color: var(--white); text-transform: uppercase;
+}
+.evento-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray-text);
+}
+.evento-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.5rem;
+}
+.evento-meta {
+  display: flex; gap: 1.5rem; font-size: 0.82rem; color: var(--gray-text);
+  margin-bottom: 0.9rem; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.08em;
+}
+.tickets-bar {
+  height: 3px; background: rgba(255,255,255,0.08);
+  border-radius: 2px; overflow: hidden; margin-bottom: 0.4rem;
+  width: 260px; max-width: 100%;
+}
+.tickets-fill { height: 100%; background: var(--red); border-radius: 2px; }
+.tickets-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gray-text);
+}
+.evento-action {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.8rem;
+}
+.evento-price {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); line-height: 1;
+}
+.evento-btn { text-decoration: none; display: inline-block; white-space: nowrap; }
+
+@media (max-width: 700px) {
+  .nav-login-btn.nav-cta-desktop { display: none; }
+  .evento-card {
+    grid-template-columns: auto 1fr; grid-template-rows: auto auto;
+    padding: 1.5rem; gap: 1rem;
+  }
+  .evento-action {
+    grid-column: 1 / -1; flex-direction: row;
+    justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem;
+  }
+  .evento-name { font-size: 1.2rem; }
+  .evento-meta { flex-direction: column; gap: 0.3rem; }
+  .tickets-bar { width: 100%; }
+}

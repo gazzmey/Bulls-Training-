@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Bulls Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- LOGIN GATE -->
+<div id="loginGate">
+  <div class="gate-box">
+    <div class="gate-logo">BULLS <span>TRAINING</span></div>
+    <div class="gate-sub">Panel Administrador</div>
+    <input type="text"     id="gUser" placeholder="Usuario"    autocomplete="off">
+    <input type="password" id="gPass" placeholder="Contraseña">
+    <div class="gate-err" id="gErr">Credenciales incorrectas</div>
+    <button class="gate-btn" onclick="adminLogin()">Ingresar</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">BULLS <span>T</span><span class="sidebar-badge admin-word">ADMIN</span></div>
+  <nav class="sidebar-nav">
+    <div class="snav-item active" onclick="showTab('dashboard')"><span class="snav-icon">📊</span><span>Dashboard</span></div>
+    <div class="snav-item" onclick="showTab('eventos')"><span class="snav-icon">🥊</span><span>Eventos</span></div>
+    <div class="snav-item" onclick="showTab('entradas')"><span class="snav-icon">🎫</span><span>Entradas</span></div>
+    <div class="snav-item" onclick="showTab('scanner')"><span class="snav-icon">📷</span><span>Scanner QR</span></div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user"><strong>Admin</strong>Bulls Training</div>
+    <button class="btn-logout" onclick="adminLogout()">Cerrar sesión</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="admin-main">
+
+  <!-- DASHBOARD -->
+  <div class="tab-panel active" id="tab-dashboard">
+    <div class="admin-header">
+      <h1>DASHBOARD</h1>
+      <p>Resumen general — actualizado en tiempo real</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Eventos activos</div><div class="stat-num red">3</div><div class="stat-sub">Próximas veladas</div></div>
+      <div class="stat-card"><div class="stat-label">Entradas vendidas</div><div class="stat-num">90</div><div class="stat-sub">De 450 disponibles</div></div>
+      <div class="stat-card"><div class="stat-label">Recaudación</div><div class="stat-num">$1.2M</div><div class="stat-sub">CLP este mes</div></div>
+      <div class="stat-card"><div class="stat-label">Compradores</div><div class="stat-num">87</div><div class="stat-sub">Cuentas registradas</div></div>
+    </div>
+    <div class="sec-head"><h2>Eventos próximos</h2></div>
+    <table class="admin-table">
+      <thead><tr><th>Evento</th><th>Fecha</th><th>Entradas</th><th>Ocupación</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>Velada de Boxeo #1</td><td>15 Jul 2026</td><td>67 / 100</td><td><div class="prog-bar"><div class="prog-fill" style="width:67%"></div></div></td><td><span class="badge badge-green">Activo</span></td></tr>
+        <tr><td>Noche de Campeones</td><td>03 Ago 2026</td><td>23 / 150</td><td><div class="prog-bar"><div class="prog-fill" style="width:15%"></div></div></td><td><span class="badge badge-green">Activo</span></td></tr>
+        <tr><td>Torneo Amateur Bulls</td><td>20 Ago 2026</td><td>0 / 200</td><td><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></td><td><span class="badge badge-gray">Preventa</span></td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head"><h2>Últimas compras</h2></div>
+    <table class="admin-table">
+      <thead><tr><th>Ticket ID</th><th>Comprador</th><th>Evento</th><th>Hora</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>BT-2026-4821</td><td>Carlos Rojas</td><td>Velada de Boxeo #1</td><td>Hoy 14:32</td><td><span class="badge badge-green">Válido</span></td></tr>
+        <tr><td>BT-2026-4820</td><td>María González</td><td>Noche de Campeones</td><td>Hoy 13:15</td><td><span class="badge badge-green">Válido</span></td></tr>
+        <tr><td>BT-2026-4819</td><td>Felipe Torres</td><td>Velada de Boxeo #1</td><td>Hoy 11:47</td><td><span class="badge badge-red">Usado</span></td></tr>
+        <tr><td>BT-2026-4818</td><td>Ana Muñoz</td><td>Velada de Boxeo #1</td><td>Ayer 20:03</td><td><span class="badge badge-green">Válido</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EVENTOS -->
+  <div class="tab-panel" id="tab-eventos">
+    <div class="admin-header"><h1>EVENTOS</h1><p>Gestiona las veladas y torneos</p></div>
+    <div class="sec-head"><h2>Todos los eventos</h2><button class="btn-add" onclick="openModal()">+ Nuevo evento</button></div>
+    <table class="admin-table">
+      <thead><tr><th>Nombre</th><th>Fecha</th><th>Hora</th><th>Precio</th><th>Cap.</th><th>Vendidos</th><th>Acciones</th></tr></thead>
+      <tbody id="eventosTable">
+        <tr><td>Velada de Boxeo #1</td><td>15 Jul 2026</td><td>20:00</td><td>$15.000</td><td>100</td><td>67</td><td><button class="btn-sm">Editar</button> <button class="btn-sm del">Eliminar</button></td></tr>
+        <tr><td>Noche de Campeones</td><td>03 Ago 2026</td><td>21:00</td><td>$20.000</td><td>150</td><td>23</td><td><button class="btn-sm">Editar</button> <button class="btn-sm del">Eliminar</button></td></tr>
+        <tr><td>Torneo Amateur Bulls</td><td>20 Ago 2026</td><td>18:00</td><td>$8.000</td><td>200</td><td>0</td><td><button class="btn-sm">Editar</button> <button class="btn-sm del">Eliminar</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ENTRADAS -->
+  <div class="tab-panel" id="tab-entradas">
+    <div class="admin-header"><h1>ENTRADAS</h1><p>Registro completo de tickets emitidos</p></div>
+    <table class="admin-table">
+      <thead><tr><th>Ticket ID</th><th>Titular</th><th>RUT</th><th>Evento</th><th>Asiento</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>BT-2026-4821</td><td>Carlos Rojas</td><td>15.234.567-8</td><td>Velada de Boxeo #1</td><td>A-07</td><td><span class="badge badge-green">Válido</span></td></tr>
+        <tr><td>BT-2026-4820</td><td>María González</td><td>12.987.654-3</td><td>Noche de Campeones</td><td>B-12</td><td><span class="badge badge-green">Válido</span></td></tr>
+        <tr><td>BT-2026-4819</td><td>Felipe Torres</td><td>13.456.789-K</td><td>Velada de Boxeo #1</td><td>C-05</td><td><span class="badge badge-red">Usado</span></td></tr>
+        <tr><td>BT-2026-4818</td><td>Ana Muñoz</td><td>17.654.321-2</td><td>Velada de Boxeo #1</td><td>A-12</td><td><span class="badge badge-green">Válido</span></td></tr>
+        <tr><td>BT-2026-4817</td><td>Pedro Soto</td><td>16.123.456-7</td><td>Noche de Campeones</td><td>D-09</td><td><span class="badge badge-green">Válido</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SCANNER -->
+  <div class="tab-panel" id="tab-scanner">
+    <div class="admin-header"><h1>SCANNER QR</h1><p>Verifica la autenticidad de cada entrada en la puerta</p></div>
+    <div class="scanner-wrap">
+      <div class="scanner-frame">
+        <div class="scanner-corners"></div>
+        <div class="scanner-line"></div>
+      </div>
+      <p class="scanner-hint">Apunta la cámara al QR del comprador</p>
+      <button class="btn-simulate" onclick="simulateScan(true)">✅ Simular escaneo válido</button>
+      <button class="btn-simulate" onclick="simulateScan(false)" style="background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--gray-text)">❌ Simular entrada inválida</button>
+      <div class="scan-result" id="scanResult">
+        <div class="scan-result-title" id="scanTitle">—</div>
+        <div class="scan-fields" id="scanFields"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL NUEVO EVENTO -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-title">Nuevo evento</div>
+    <div class="modal-field"><label class="modal-label">Nombre del evento</label><input class="modal-input" placeholder="Ej: Velada de Boxeo #4"></div>
+    <div class="modal-row">
+      <div class="modal-field"><label class="modal-label">Fecha</label><input class="modal-input" type="date"></div>
+      <div class="modal-field"><label class="modal-label">Hora</label><input class="modal-input" type="time"></div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field"><label class="modal-label">Capacidad</label><input class="modal-input" type="number" placeholder="100"></div>
+      <div class="modal-field"><label class="modal-label">Precio ($)</label><input class="modal-input" type="number" placeholder="15000"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-modal-save" onclick="saveEvento()">Guardar evento</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Auth
+function adminLogin(){
+  const u=document.getElementById('gUser').value.trim();
+  const p=document.getElementById('gPass').value;
+  if(u==='admin' && p==='admin123'){
+    document.getElementById('loginGate').style.display='none';
+  } else {
+    document.getElementById('gErr').style.display='block';
+  }
+}
+function adminLogout(){ document.getElementById('loginGate').style.display='flex'; }
+
+// Tabs
+function showTab(id){
+  document.querySelectorAll('.tab-panel').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.snav-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// Modal
+function openModal(){ document.getElementById('modalOverlay').classList.add('show'); }
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('show'); }
+function saveEvento(){
+  alert('En producción: evento guardado en la base de datos.');
+  closeModal();
+}
+
+// Scanner simulation
+function simulateScan(valid){
+  const r=document.getElementById('scanResult');
+  const t=document.getElementById('scanTitle');
+  const f=document.getElementById('scanFields');
+  r.style.display='block';
+  r.className='scan-result '+(valid?'valid':'invalid');
+  t.textContent = valid ? '✅ ENTRADA VÁLIDA' : '❌ ENTRADA INVÁLIDA';
+  if(valid){
+    f.innerHTML=`
+      <div><div class="scan-field-label">Titular</div><div class="scan-field-value">Carlos Rojas</div></div>
+      <div><div class="scan-field-label">RUT</div><div class="scan-field-value">15.234.567-8</div></div>
+      <div><div class="scan-field-label">Evento</div><div class="scan-field-value">Velada de Boxeo #1</div></div>
+      <div><div class="scan-field-label">Asiento</div><div class="scan-field-value">A-07</div></div>
+      <div><div class="scan-field-label">Ticket ID</div><div class="scan-field-value">BT-2026-4821</div></div>
+      <div><div class="scan-field-label">Estado</div><div class="scan-field-value" style="color:#4caf82">Primera vez — OK</div></div>`;
+  } else {
+    f.innerHTML=`
+      <div><div class="scan-field-label">Ticket ID</div><div class="scan-field-value">BT-2026-4819</div></div>
+      <div><div class="scan-field-label">Motivo</div><div class="scan-field-value" style="color:#ff6b6b">Ya fue usado anteriormente</div></div>`;
+  }
+}
+
+// Enter key on login
+document.getElementById('gPass').addEventListener('keydown',e=>{ if(e.key==='Enter') adminLogin(); });
+</script>
+</body>
+</html>

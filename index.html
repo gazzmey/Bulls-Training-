@@ -15,10 +15,16 @@
     <li><a href="#clases" class="nav-close">Clases</a></li>
     <li><a href="#horarios" class="nav-close">Horarios</a></li>
     <li><a href="#planes" class="nav-close">Planes</a></li>
+    <li><a href="#eventos" class="nav-close">Eventos</a></li>
     <li><a href="#contacto" class="nav-close">Contacto</a></li>
-    <li class="nav-cta-mobile"><button class="nav-cta">Clase de prueba</button></li>
+    <li class="nav-cta-mobile"><a href="login.html" class="nav-cta" style="display:block;text-align:center;text-decoration:none;">Iniciar sesión</a></li>
   </ul>
-  <button class="nav-cta nav-cta-desktop">Clase de prueba</button>
+  <a href="login.html" class="nav-login-btn nav-cta-desktop" id="navLoginBtn">Iniciar sesión</a>
+  <div class="nav-user" id="navUser" style="display:none;">
+    <div class="nav-user-avatar" id="navAvatar">?</div>
+    <span id="navUserName"></span>
+    <button class="nav-logout-btn" onclick="cerrarSesion()">Salir</button>
+  </div>
   <button class="nav-hamburger" id="navToggle" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
@@ -180,6 +186,83 @@
   </div>
 </section>
 
+<section id="eventos">
+  <p class="section-tag">Próximas veladas</p>
+  <h2 class="section-title">EVENTOS</h2>
+  <div class="eventos-grid">
+
+    <div class="evento-card">
+      <div class="evento-date-badge">
+        <span class="evento-day">15</span>
+        <span class="evento-month">JUL</span>
+        <span class="evento-year">2026</span>
+      </div>
+      <div class="evento-info">
+        <h3 class="evento-name">VELADA DE BOXEO #1</h3>
+        <div class="evento-meta">
+          <span>⏱ 20:00 hrs</span>
+          <span>📍 Bulls Training Gym</span>
+        </div>
+        <div class="evento-tickets">
+          <div class="tickets-bar"><div class="tickets-fill" style="width:67%"></div></div>
+          <span class="tickets-label">67 / 100 entradas vendidas</span>
+        </div>
+      </div>
+      <div class="evento-action">
+        <div class="evento-price">$15.000</div>
+        <a href="login.html?evento=1" class="btn-primary evento-btn">Comprar entrada</a>
+      </div>
+    </div>
+
+    <div class="evento-card">
+      <div class="evento-date-badge">
+        <span class="evento-day">03</span>
+        <span class="evento-month">AGO</span>
+        <span class="evento-year">2026</span>
+      </div>
+      <div class="evento-info">
+        <h3 class="evento-name">NOCHE DE CAMPEONES</h3>
+        <div class="evento-meta">
+          <span>⏱ 21:00 hrs</span>
+          <span>📍 Bulls Training Gym</span>
+        </div>
+        <div class="evento-tickets">
+          <div class="tickets-bar"><div class="tickets-fill" style="width:15%"></div></div>
+          <span class="tickets-label">23 / 150 entradas vendidas</span>
+        </div>
+      </div>
+      <div class="evento-action">
+        <div class="evento-price">$20.000</div>
+        <a href="login.html?evento=2" class="btn-primary evento-btn">Comprar entrada</a>
+      </div>
+    </div>
+
+    <div class="evento-card">
+      <div class="evento-date-badge">
+        <span class="evento-day">20</span>
+        <span class="evento-month">AGO</span>
+        <span class="evento-year">2026</span>
+      </div>
+      <div class="evento-info">
+        <h3 class="evento-name">TORNEO AMATEUR BULLS</h3>
+        <div class="evento-meta">
+          <span>⏱ 18:00 hrs</span>
+          <span>📍 Bulls Training Gym</span>
+        </div>
+        <div class="evento-tickets">
+          <div class="tickets-bar"><div class="tickets-fill" style="width:0%"></div></div>
+          <span class="tickets-label">0 / 200 entradas — ¡Preventa!</span>
+        </div>
+      </div>
+      <div class="evento-action">
+        <div class="evento-price">$8.000</div>
+        <a href="login.html?evento=3" class="btn-primary evento-btn">Comprar entrada</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section id="contacto">
   <p class="section-tag">Hablemos</p>
   <h2 class="section-title">CONTACTO</h2>
@@ -244,6 +327,7 @@
   <div class="footer-social">
     <a href="https://instagram.com/bulls_training" target="_blank">Instagram</a>
     <a href="https://wa.me/56900000000">WhatsApp</a>
+    <a href="admin.html" style="color:rgba(255,255,255,0.2);font-size:0.6rem;">Admin</a>
   </div>
 </footer>
 

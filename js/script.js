@@ -2,7 +2,21 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Scroll suave al hacer clic en "Empieza hoy" ──────────────────────────
+  // ── Estado de sesión en nav ───────────────────────────────────────────
+  const user = JSON.parse(localStorage.getItem('bt_user') || 'null');
+  const loginBtn = document.getElementById('navLoginBtn');
+  const userEl   = document.getElementById('navUser');
+  const avatarEl = document.getElementById('navAvatar');
+  const nameEl   = document.getElementById('navUserName');
+
+  if (user && loginBtn && userEl) {
+    loginBtn.style.display = 'none';
+    userEl.style.display   = 'flex';
+    if (avatarEl) avatarEl.textContent = user.nombre.charAt(0).toUpperCase();
+    if (nameEl)   nameEl.textContent   = user.nombre.split(' ')[0];
+  }
+
+  // ── Scroll suave al hacer clic en "Empieza hoy" ───────────────────────
   const btnEmpiezaHoy = document.querySelector('.btn-primary[data-scroll="contacto"]');
   if (btnEmpiezaHoy) {
     btnEmpiezaHoy.addEventListener('click', () => {
@@ -10,19 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Menú hamburguesa ─────────────────────────────────────────────────────
+  // ── Menú hamburguesa ─────────────────────────────────────────────────
   const toggle   = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
 
   if (toggle && navLinks) {
-    // Abrir / cerrar
     toggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
       toggle.classList.toggle('open', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // Cerrar al hacer clic en cualquier enlace del menú
     navLinks.querySelectorAll('.nav-close').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -31,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Cerrar si se redimensiona a escritorio
     window.addEventListener('resize', () => {
       if (window.innerWidth > 700) {
         navLinks.classList.remove('open');
@@ -42,3 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// ── Cerrar sesión ─────────────────────────────────────────────────────
+function cerrarSesion() {
+  localStorage.removeItem('bt_user');
+  localStorage.removeItem('bt_evento');
+  window.location.reload();
+}
